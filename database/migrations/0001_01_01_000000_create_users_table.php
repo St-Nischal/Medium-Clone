@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +15,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone_number')->nullable(); // Changed from integer to string and made nullable
+            $table->string('username')->unique();
+            $table->string('timezone');
+            $table->string('locale')->default('en'); // Added default value
+            $table->timestamp('terms_accepted_at')->nullable(); // Added terms acceptance timestamp
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
