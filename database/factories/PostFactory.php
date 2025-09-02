@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +15,8 @@ class PostFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    
     public function definition(): array
     {
         $title = $this->faker->sentence();
@@ -21,10 +24,10 @@ class PostFactory extends Factory
             'image'=> fake()->imageUrl(),
             'title' => $title,
             'slug' => \Illuminate\Support\Str::slug($title),
-            'content' => $this->faker->paragraphs(5),
-            'category_id' => \App\Models\Category::inRandomOrder()->first()->id,
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
-            'published_at' => $this->faker->dateTimeBetween('-1 years', 'now'),
+            'content' => implode("\n\n", $this->faker->paragraphs(5)),
+            'category_id' => Category::inRandomOrder()->first()->id,
+            'user_id' => 1,
+            'published_at' => fake()->optional()->dateTime(),
 
         ];
     }
