@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Pow;
 
 class PostController extends Controller
 {
@@ -15,10 +16,13 @@ class PostController extends Controller
     {
         $categories = Category::get();
 
-        dump($categories);
+        $posts = Post::orderBy('created_at','DESC')->paginate(5);
+
+        
 
         return view("dashboard",[
-            "categories"=> $categories
+            'categories'=> $categories,
+            'posts'=> $posts,
         ]);
     }
 
